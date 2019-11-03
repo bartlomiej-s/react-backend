@@ -4,6 +4,6 @@ import pw.react.backend.reactbackend.entity.User;
 
 public interface FindUserRepo {
 
-    User find(User usr);
+    User find(String login);
 
 }

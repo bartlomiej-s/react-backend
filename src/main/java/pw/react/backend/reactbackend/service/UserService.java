@@ -6,14 +6,14 @@ import org.springframework.http.ResponseEntity;
 import pw.react.backend.reactbackend.entity.User;
 
 public interface UserService {
-	List<User> findAll();
+	Object findUser(String login);
 
 	ResponseEntity insertUser(User usr);
 
-	void updateUser(User usr);
+	ResponseEntity updateUser(User usr);
 
 	void executeUpdateUser(User usr);
 
-	void deleteUser(User usr);
+	ResponseEntity deleteUser(String login);
 	
 }

@@ -1,9 +1,6 @@
 package pw.react.backend.reactbackend.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -11,10 +8,12 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = "login")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     @NotNull

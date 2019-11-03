@@ -13,12 +13,12 @@ public class FindUserRepoImpl implements FindUserRepo{
     @Resource
     UserDao userDao;
 
-    public User find(User usr)
+    public User find(String login)
     {
         List<User> list = userDao.findAll();
         for(User x: list)
         {
-            if (x.getLogin().equals(usr.getLogin()))
+            if (x.getLogin().equals(login))
             {
                 return x;
             }
