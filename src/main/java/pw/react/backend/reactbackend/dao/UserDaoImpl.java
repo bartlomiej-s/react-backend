@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao{
     public UserDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
-    NamedParameterJdbcTemplate template;
+    private NamedParameterJdbcTemplate template;
 
     @Override
     public List<User> findAll() {
@@ -31,42 +31,42 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void insertUser(User usr) {
-        final String sql = "insert into db_schema.Users(id, login, first_name, last_name, date_of_birth, active) values(:id, :login, :first_name, :last_name, :date_of_birth, :active);";
+        final String sql = "insert into db_schema.Users(id, login, firstName, lastName, dateOfBirth, active) values(:id, :login, :firstName, :lastName, :dateOfBirth, :active);";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("id", usr.getUserId())
-                .addValue("login", usr.getUserLogin())
-                .addValue("first_name", usr.getUserFirstName())
-                .addValue("last_name", usr.getUserLastName())
-                .addValue("date_of_birth", usr.getUserDateOfBirth())
-                .addValue("active", usr.getUserActive());
+                .addValue("id", usr.getId())
+                .addValue("login", usr.getLogin())
+                .addValue("firstName", usr.getFirstName())
+                .addValue("lastName", usr.getLastName())
+                .addValue("dateOfBirth", usr.getDateOfBirth())
+                .addValue("active", usr.getActive());
         template.update(sql,param, holder);
     }
 
     @Override
     public void updateUser(User usr) {
-        final String sql = "update db_schema.Users set login=:login, first_name=:first_name, last_name=:last_name, date_of_birth=:date_of_birth, active=:active where id=:id";
+        final String sql = "update db_schema.Users set login=:login, firstName=:firstName, lastName=:lastName, dateOfBirth=:dateOfBirth, active=:active where id=:id";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("id", usr.getUserId())
-                .addValue("login", usr.getUserLogin())
-                .addValue("first_name", usr.getUserFirstName())
-                .addValue("last_name", usr.getUserLastName())
-                .addValue("date_of_birth", usr.getUserDateOfBirth())
-                .addValue("active", usr.getUserActive());
+                .addValue("id", usr.getId())
+                .addValue("login", usr.getLogin())
+                .addValue("firstName", usr.getFirstName())
+                .addValue("lastName", usr.getLastName())
+                .addValue("dateOfBirth", usr.getDateOfBirth())
+                .addValue("active", usr.getActive());
         template.update(sql,param, holder);
     }
 
     @Override
     public void executeUpdateUser(User usr) {
-        final String sql = "update db_schema.Users set login=:login, first_name=:first_name, last_name=:last_name, date_of_birth=:date_of_birth, active=:active where id=:id";
+        final String sql = "update db_schema.Users set login=:login, firstName=:firstName, lastName=:lastName, dateOfBirth=:dateOfBirth, active=:active where id=:id";
         Map<String,Object> map=new HashMap<String,Object>();
-        map.put("id", usr.getUserId());
-        map.put("login", usr.getUserLogin());
-        map.put("first_name", usr.getUserFirstName());
-        map.put("last_name", usr.getUserLastName());
-        map.put("date_of_birth", usr.getUserDateOfBirth());
-        map.put("active", usr.getUserActive());
+        map.put("id", usr.getId());
+        map.put("login", usr.getLogin());
+        map.put("firstName", usr.getFirstName());
+        map.put("lastName", usr.getLastName());
+        map.put("dateOfBirth", usr.getDateOfBirth());
+        map.put("active", usr.getActive());
 
         template.execute(sql,map,new PreparedStatementCallback<Object>() {
             @Override
@@ -81,7 +81,7 @@ public class UserDaoImpl implements UserDao{
     public void deleteUser(User usr) {
         final String sql = "delete from db_schema.Users where id=:id";
         Map<String,Object> map=new HashMap<String,Object>();
-        map.put("id", usr.getUserId());
+        map.put("id", usr.getId());
 
         template.execute(sql,map,new PreparedStatementCallback<Object>() {
             @Override

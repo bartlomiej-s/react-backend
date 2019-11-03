@@ -13,72 +13,63 @@ import java.text.ParseException;
 @Entity
 public class User implements Serializable {
 
-    /*public User(Long idX, String loginX, String firstNameX, String lastNameX, Date date_of_birthX, boolean activeX) {
-        this.id = idX;
-        this.login = loginX;
-        this.firstName = firstNameX;
-        this.lastName = lastNameX;
-        this.date_of_birth = date_of_birthX;
-        this.active = activeX;
-    }*/
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     @NotNull
-    protected String login;
+    private String login;
     @NotNull
-    protected String firstName;
+    private String firstName;
     @NotNull
-    protected String lastName;
+    private String lastName;
     @NotNull
-    protected Date date_of_birth;
+    private Date dateOfBirth;
     @NotNull
-    protected boolean active;
+    private boolean active;
 
-    public Long getUserId() {
+    public String getId() {
         return id;
     }
-    public String getUserLogin() {
+    public String getLogin() {
         return login;
     }
-    public String getUserFirstName() {
+    public String getFirstName() {
         return firstName;
     }
-    public String getUserLastName() {
+    public String getLastName() {
         return lastName;
     }
-    public Date getUserDateOfBirth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
-    public Boolean getUserActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setUserId(String  id) {
-        this.id = Long.parseLong(id);
+    public void setId(String  id) {
+        this.id = id;
     }
-    public void setUserLogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
-    public void setUserFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public void setUserLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void setUserDateOfBirth(String date_of_birth) {
+    public void setDateOfBirth(String dateOfBirth) {
         try
         {
-            this.date_of_birth = new SimpleDateFormat("YYYY-MM-DD").parse(date_of_birth);
+            this.dateOfBirth = new SimpleDateFormat("YYYY-MM-DD").parse(dateOfBirth);
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
     }
-    public void setUserActive(String active) {
+    public void setActive(String active) {
         this.active = Boolean.parseBoolean(active);
     }
 }
