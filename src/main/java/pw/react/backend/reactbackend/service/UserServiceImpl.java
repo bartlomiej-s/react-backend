@@ -1,7 +1,5 @@
 package pw.react.backend.reactbackend.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
@@ -20,12 +18,14 @@ public class UserServiceImpl implements UserService{
 	UserExistsService userExistsService;
 	@Resource
 	FindUserRepo findUserRepo;
+
 	@Override
 	public Object findUser(String login) {
 		User usr = findUserRepo.find(login);
 		if (usr==null) return new ResponseEntity("User with such login is not present in the database.", HttpStatus.CONFLICT);
 		else return usr;
 	}
+
 	@Override
 	public ResponseEntity insertUser(User usr) {
 		if (userExistsService.exists(usr))
@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService{
 			return new ResponseEntity(HttpStatus.OK);
 		}
 	}
+
 	@Override
 	public ResponseEntity updateUser(User usr) {
 		if (userExistsService.exists(usr)) {
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService{
 		}
 		else return new ResponseEntity("User with such a login is not present in the database.", HttpStatus.CONFLICT);
 	}
+
 	@Override
 	public void executeUpdateUser(User usr) {
 		userDao.executeUpdateUser(usr);
@@ -58,4 +60,6 @@ public class UserServiceImpl implements UserService{
 			return new ResponseEntity(HttpStatus.OK);
 		}
 	}
+
+
 }
