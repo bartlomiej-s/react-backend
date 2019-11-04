@@ -182,7 +182,8 @@ public class ReactBackendApplicationTests {
 		usr.setActive("false");
 
 		MvcResult mvcResult = this.mockMvc.perform(get("/user")
-				.param("login", "jacek123")).andDo(print()).andExpect(status().isOk())
+				.param("login", "jacek123").header("password","postgrespass"))
+				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8"))
 				.andReturn();
 
@@ -192,7 +193,8 @@ public class ReactBackendApplicationTests {
 	@Test
 	public void getTest2() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(get("/user")
-				.param("login", "jacek12")).andDo(print()).andExpect(status().isConflict())
+				.param("login", "jacek12").header("password","postgrespass"))
+				.andDo(print()).andExpect(status().isConflict())
 				.andExpect(content().contentType("text/plain;charset=UTF-8"))
 				.andReturn();
 
@@ -204,7 +206,7 @@ public class ReactBackendApplicationTests {
 		MvcResult mvcResult = this.mockMvc.perform(post("/user").param("id", "2")
 				.param("login", "jacek123").param("firstName","Jacek")
 				.param("lastName","Kmicic").param("dateOfBirth","2001-03-10")
-				.param("active", "false"))
+				.param("active", "false").header("password","postgrespass"))
 				.andDo(print()).andExpect(status().isConflict())
 				.andExpect(content().contentType("text/plain;charset=UTF-8"))
 				.andReturn();
@@ -217,7 +219,7 @@ public class ReactBackendApplicationTests {
 		this.mockMvc.perform(post("/user").param("id", "2")
 				.param("login", "xyz").param("firstName","Jacek")
 				.param("lastName","Kmicic").param("dateOfBirth","2001-03-10")
-				.param("active", "false"))
+				.param("active", "false").header("password","postgrespass"))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
@@ -226,7 +228,7 @@ public class ReactBackendApplicationTests {
 		this.mockMvc.perform(put("/user").param("id", "1")
 				.param("login", "jacek123").param("firstName","Jacek")
 				.param("lastName","Niewiadomski").param("dateOfBirth","2001-03-10")
-				.param("active", "true"))
+				.param("active", "true").header("password","postgrespass"))
 				.andDo(print()).andExpect(status().isOk())
 				.andReturn();
 	}
@@ -236,7 +238,7 @@ public class ReactBackendApplicationTests {
 		MvcResult mvcResult = this.mockMvc.perform(put("/user").param("id", "1")
 				.param("login", "xyz").param("firstName","Jacek")
 				.param("lastName","Kmicic").param("dateOfBirth","2001-03-10")
-				.param("active", "false"))
+				.param("active", "false").header("password","postgrespass"))
 				.andDo(print()).andExpect(status().isConflict())
 				.andExpect(content().contentType("text/plain;charset=UTF-8"))
 				.andReturn();
@@ -247,14 +249,15 @@ public class ReactBackendApplicationTests {
 	@Test
 	public void deleteTest1() throws Exception{
 		this.mockMvc.perform(delete("/user")
-				.param("login", "jacek123"))
+				.param("login", "jacek123").header("password","postgrespass"))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void deleteTest2() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(delete("/user")
-				.param("login", "xyz")).andDo(print()).andExpect(status().isConflict())
+				.param("login", "xyz").header("password","postgrespass"))
+				.andDo(print()).andExpect(status().isConflict())
 				.andExpect(content().contentType("text/plain;charset=UTF-8"))
 				.andReturn();
 
